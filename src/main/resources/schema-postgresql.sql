@@ -19,5 +19,6 @@ CREATE TABLE jiracsv  (
     custom_field_Cap_SL_BU VARCHAR(200),
     custom_field_Opportunity_Stage VARCHAR(200),
     custom_field_COR VARCHAR(200),
-    custom_field_COX_COR VARCHAR(200)
+    custom_field_COX_COR VARCHAR(200),
+     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );

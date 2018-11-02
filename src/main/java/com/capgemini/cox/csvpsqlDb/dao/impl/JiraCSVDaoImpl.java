@@ -1,5 +1,6 @@
 package com.capgemini.cox.csvpsqlDb.dao.impl;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -57,6 +58,7 @@ public class JiraCSVDaoImpl extends JdbcDaoSupport implements JiraCSVDao {
 				ps.setString(17, customer.getCustom_field_Opportunity_Stage());
 				ps.setString(18, customer.getCustom_field_COR());
 				ps.setString(19, customer.getCustom_field_COX_COR());
+				//ps.setDate(20, (Date) customer.getImported_at());
 			}
 
 			public int getBatchSize() {
@@ -94,6 +96,7 @@ public class JiraCSVDaoImpl extends JdbcDaoSupport implements JiraCSVDao {
 			customer.setCustom_field_Opportunity_Stage((String) row.get("Custom_field_Opportunity_Stage"));
 			customer.setCustom_field_COR((String) row.get("Custom_field_COR"));
 			customer.setCustom_field_COX_COR((String) row.get("Custom_field_COX_COR"));
+			//customer.setImported_at((Date) row.get("Imported_at"));
 			result.add(customer);
 		}
 		for (JiraCSV results : result) {

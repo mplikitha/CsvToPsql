@@ -1,5 +1,7 @@
 package com.capgemini.cox.csvpsqlDb.model;
 
+import java.util.Date;
+
 public class JiraCSV {
 
 	private String priority;
@@ -21,7 +23,7 @@ public class JiraCSV {
 	private String custom_field_Opportunity_Stage;
 	private String custom_field_COR;
 	private String custom_field_COX_COR;
-
+	
 	public JiraCSV() {
 
 	}
@@ -52,6 +54,7 @@ public class JiraCSV {
 		this.custom_field_Opportunity_Stage = custom_field_Opportunity_Stage;
 		this.custom_field_COR = custom_field_COR;
 		this.custom_field_COX_COR = custom_field_COX_COR;
+		
 	}
 
 	public String getPriority() {
@@ -205,4 +208,13 @@ public class JiraCSV {
 	public void setCustom_field_COX_COR(String custom_field_COX_COR) {
 		this.custom_field_COX_COR = custom_field_COX_COR;
 	}
+
+//	public Date getImported_at() {
+//		return imported_at;
+//	}
+//
+//	public void setImported_at(Date imported_at) {
+//		this.imported_at = imported_at;
+//	}
+
 }

@@ -1,5 +1,7 @@
 package com.capgemini.cox.csvpsqlDb.step;
 
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
@@ -32,6 +34,7 @@ public class Processor implements ItemProcessor<JiraCSV, JiraCSV> {
 		final String custom_field_Opportunity_Stage = customer.getCustom_field_Opportunity_Stage();
 		final String custom_field_COR = customer.getCustom_field_COR();
 		final String custom_field_COX_COR = customer.getCustom_field_COX_COR();
+		//final Date imported_at = customer.getImported_at();
 		final JiraCSV fixedCustomer = new JiraCSV(priority, issue_key, issue_id, summary, status, created,
 				custom_field_start_date, resolved, custom_field_Onshore_Offshore, custom_field_COX_Candidate_Level,
 				custom_field_COX_Capgemini_Lead, custom_field_COX_Hiring_Manager, custom_field_COX_Role_Skillset,

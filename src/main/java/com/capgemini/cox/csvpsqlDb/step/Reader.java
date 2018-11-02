@@ -6,14 +6,14 @@ import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.core.io.ClassPathResource;
 
-import com.capgemini.cox.csvpsqlDb.model.Customer;
+import com.capgemini.cox.csvpsqlDb.model.JiraCSV;
 
 public class Reader {
-	public static FlatFileItemReader<Customer> reader(String path) {
-		FlatFileItemReader<Customer> reader = new FlatFileItemReader<Customer>();
+	public static FlatFileItemReader<JiraCSV> reader(String path) {
+		FlatFileItemReader<JiraCSV> reader = new FlatFileItemReader<JiraCSV>();
 
 		reader.setResource(new ClassPathResource(path));
-		reader.setLineMapper(new DefaultLineMapper<Customer>() {
+		reader.setLineMapper(new DefaultLineMapper<JiraCSV>() {
 			{
 				setLineTokenizer(new DelimitedLineTokenizer() {
 					{
@@ -26,9 +26,9 @@ public class Reader {
 								"custom_field_COX_COR" });
 					}
 				});
-				setFieldSetMapper(new BeanWrapperFieldSetMapper<Customer>() {
+				setFieldSetMapper(new BeanWrapperFieldSetMapper<JiraCSV>() {
 					{
-						setTargetType(Customer.class);
+						setTargetType(JiraCSV.class);
 					}
 				});
 			}

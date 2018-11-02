@@ -16,13 +16,12 @@ import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
-import com.capgemini.cox.csvpsqlDb.dao.CustomerDao;
-import com.capgemini.cox.csvpsqlDb.model.Customer;
-
+import com.capgemini.cox.csvpsqlDb.dao.JiraCSVDao;
+import com.capgemini.cox.csvpsqlDb.model.JiraCSV;
 
 @Repository
-public class CustomerDaoImpl extends JdbcDaoSupport implements CustomerDao {
-	private static final Logger log = LoggerFactory.getLogger(CustomerDaoImpl.class);
+public class JiraCSVDaoImpl extends JdbcDaoSupport implements JiraCSVDao {
+	private static final Logger log = LoggerFactory.getLogger(JiraCSVDaoImpl.class);
 	@Autowired
 	DataSource dataSource;
 
@@ -32,15 +31,16 @@ public class CustomerDaoImpl extends JdbcDaoSupport implements CustomerDao {
 	}
 
 	@Override
-	public void insert(List<? extends Customer> Customers) {
-		String sql = "INSERT INTO customer " + "( priority, issue_key, issue_id, summary, status, created, custom_field_start_date, resolved, custom_field_Onshore_Offshore, custom_field_COX_Candidate_Level, custom_field_COX_Capgemini_Lead, custom_field_COX_Hiring_Manager, custom_field_COX_Role_Skillset,custom_field_COX_Tier_Level, custom_field_Position_Backfill_New, custom_field_Cap_SL_BU,custom_field_Opportunity_Stage, custom_field_COR, custom_field_COX_COR) VALUES ( ?, ?,?, ?, ?,?, ?, ?,?, ?, ?,?, ?, ?,?, ?, ?,?, ?)";
+	public void insert(List<? extends JiraCSV> Customers) {
+		String sql = "INSERT INTO jiracsv "
+				+ "( priority, issue_key, issue_id, summary, status, created, custom_field_start_date, resolved, custom_field_Onshore_Offshore, custom_field_COX_Candidate_Level, custom_field_COX_Capgemini_Lead, custom_field_COX_Hiring_Manager, custom_field_COX_Role_Skillset,custom_field_COX_Tier_Level, custom_field_Position_Backfill_New, custom_field_Cap_SL_BU,custom_field_Opportunity_Stage, custom_field_COR, custom_field_COX_COR) VALUES ( ?, ?,?, ?, ?,?, ?, ?,?, ?, ?,?, ?, ?,?, ?, ?,?, ?)";
 		getJdbcTemplate().batchUpdate(sql, new BatchPreparedStatementSetter() {
 			public void setValues(PreparedStatement ps, int i) throws SQLException {
-				Customer customer = Customers.get(i);
+				JiraCSV customer = Customers.get(i);
 //				ps.setLong(1, customer.getId());
 				ps.setString(1, customer.getPriority());
 				ps.setString(2, customer.getIssue_key());
-				ps.setString(3, customer.getIssue_id());
+				ps.setInt(3, customer.getIssue_id());
 				ps.setString(4, customer.getSummary());
 				ps.setString(5, customer.getStatus());
 				ps.setString(6, customer.getCreated());
@@ -67,17 +67,17 @@ public class CustomerDaoImpl extends JdbcDaoSupport implements CustomerDao {
 	}
 
 	@Override
-	public List<Customer> loadAllCustomers() {
-		String sql = "SELECT * FROM customer";
+	public List<JiraCSV> loadAllCustomers() {
+		String sql = "SELECT * FROM jiracsv";
 		List<Map<String, Object>> rows = getJdbcTemplate().queryForList(sql);
 
-		List<Customer> result = new ArrayList<Customer>();
+		List<JiraCSV> result = new ArrayList<JiraCSV>();
 		for (Map<String, Object> row : rows) {
-			Customer customer = new Customer();
+			JiraCSV customer = new JiraCSV();
 //			customer.setId((int) row.get("id"));
 			customer.setPriority((String) row.get("Priority"));
 			customer.setIssue_key((String) row.get("Issue_key"));
-			customer.setIssue_id((String) row.get("Issue_id"));
+//			customer.setIssue_id((int) row.get("Issue_id"));
 			customer.setSummary((String) row.get("Summary"));
 			customer.setStatus((String) row.get("Status"));
 			customer.setCreated((String) row.get("Created"));
@@ -96,10 +96,9 @@ public class CustomerDaoImpl extends JdbcDaoSupport implements CustomerDao {
 			customer.setCustom_field_COX_COR((String) row.get("Custom_field_COX_COR"));
 			result.add(customer);
 		}
-		for (Customer results : result) {
+		for (JiraCSV results : result) {
 			log.info("Found <" + results + "> in the database.");
 		}
 		return result;
 	}
 }
-

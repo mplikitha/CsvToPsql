@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.capgemini.cox.csvpsqlDb.dao.CustomerDao;
-import com.capgemini.cox.csvpsqlDb.model.Customer;
+import com.capgemini.cox.csvpsqlDb.dao.JiraCSVDao;
+import com.capgemini.cox.csvpsqlDb.model.JiraCSV;
 import com.capgemini.cox.csvpsqlDb.step.Listener;
 import com.capgemini.cox.csvpsqlDb.step.Processor;
 import com.capgemini.cox.csvpsqlDb.step.Reader;
@@ -29,19 +29,19 @@ public class BatchConfig {
 	public StepBuilderFactory stepBuilderFactory;
 
 	@Autowired
-	public CustomerDao customerDao;
+	public JiraCSVDao jiraCSVDao;
 
 	@Bean
 	public Job job() {
-		return jobBuilderFactory.get("job").incrementer(new RunIdIncrementer()).listener(new Listener(customerDao))
+		return jobBuilderFactory.get("job").incrementer(new RunIdIncrementer()).listener(new Listener(jiraCSVDao))
 				.flow(step1()).end().build();
 	}
 
 	@Bean
 	public Step step1() {
-		return stepBuilderFactory.get("step1").<Customer, Customer>chunk(19)
+		return stepBuilderFactory.get("step1").<JiraCSV, JiraCSV>chunk(2)
 				.reader(Reader
 						.reader("Revenue Positions Closed in Past 2 Weeks by Resolved date (TMT Staffing Portal).csv"))
-				.processor(new Processor()).writer(new Writer(customerDao)).build();
+				.processor(new Processor()).writer(new Writer(jiraCSVDao)).build();
 	}
 }

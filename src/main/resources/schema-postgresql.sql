@@ -1,9 +1,9 @@
-DROP TABLE IF EXISTS customer;
+DROP TABLE IF EXISTS jiracsv;
 
-CREATE TABLE customer  (
+CREATE TABLE jiracsv  (
     priority VARCHAR(200),
     issue_key VARCHAR(200),
-    issue_id VARCHAR(200),
+    issue_id INT NOT NULL,
     summary VARCHAR(200),
     status VARCHAR(200),
     created VARCHAR(200),

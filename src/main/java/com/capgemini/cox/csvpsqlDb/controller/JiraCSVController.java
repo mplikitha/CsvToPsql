@@ -7,20 +7,19 @@ import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1")
-public class CustomerController {
+public class JiraCSVController {
 	@Autowired
 	JobLauncher jobLauncher;
 
 	@Autowired
 	Job job;
 
-	@PostMapping("/run")
+	@RequestMapping("/run")
 	public String handle() throws Exception {
 		Logger logger = LoggerFactory.getLogger(this.getClass());
 		try {
@@ -28,7 +27,7 @@ public class CustomerController {
 					.toJobParameters();
 			jobLauncher.run(job, jobParameters);
 		} catch (Exception e) {
-			logger.info(e.getMessage());
+			logger.error(e.getMessage());
 		}
 		return "Done! Check Console Window for more details";
 	}

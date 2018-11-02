@@ -8,17 +8,17 @@ import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.listener.JobExecutionListenerSupport;
 
-import com.capgemini.cox.csvpsqlDb.dao.CustomerDao;
-import com.capgemini.cox.csvpsqlDb.model.Customer;
+import com.capgemini.cox.csvpsqlDb.dao.JiraCSVDao;
+import com.capgemini.cox.csvpsqlDb.model.JiraCSV;
 
 
 
 public class Listener extends JobExecutionListenerSupport {
 	private static final Logger log = LoggerFactory.getLogger(Listener.class);
 
-	private final CustomerDao customerDao;
+	private final JiraCSVDao customerDao;
 
-	public Listener(CustomerDao customerDao) {
+	public Listener(JiraCSVDao customerDao) {
 		this.customerDao = customerDao;
 	}
 
@@ -27,9 +27,9 @@ public class Listener extends JobExecutionListenerSupport {
 		if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
 			log.info("Finish Job! Check the results");
 
-			List<Customer> customers = customerDao.loadAllCustomers();
+			List<JiraCSV> customers = customerDao.loadAllCustomers();
 
-			for (Customer customer : customers) {
+			for (JiraCSV customer : customers) {
 				log.info("Found <" + customer + "> in the database.");
 			}
 		}

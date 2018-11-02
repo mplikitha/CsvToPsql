@@ -1,11 +1,10 @@
 package com.capgemini.cox.csvpsqlDb.model;
 
-public class Customer {
+public class JiraCSV {
 
-	
 	private String priority;
 	private String issue_key;
-	private String issue_id;
+	private int issue_id;
 	private String summary;
 	private String status;
 	private String created;
@@ -23,11 +22,11 @@ public class Customer {
 	private String custom_field_COR;
 	private String custom_field_COX_COR;
 
-	public Customer() {
-		
+	public JiraCSV() {
+
 	}
 
-	public Customer(String priority, String issue_key, String issue_id, String summary, String status, String created,
+	public JiraCSV(String priority, String issue_key, int issue_id, String summary, String status, String created,
 			String custom_field_start_date, String resolved, String custom_field_Onshore_Offshore,
 			String custom_field_COX_Candidate_Level, String custom_field_COX_Capgemini_Lead,
 			String custom_field_COX_Hiring_Manager, String custom_field_COX_Role_Skillset,
@@ -71,11 +70,11 @@ public class Customer {
 		this.issue_key = issue_key;
 	}
 
-	public String getIssue_id() {
+	public int getIssue_id() {
 		return issue_id;
 	}
 
-	public void setIssue_id(String issue_id) {
+	public void setIssue_id(int issue_id) {
 		this.issue_id = issue_id;
 	}
 

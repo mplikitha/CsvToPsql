@@ -1,6 +1,5 @@
 package com.capgemini.cox.csvpsqlDb.model;
 
-import java.util.Date;
 
 public class JiraCSV {
 
@@ -209,12 +208,22 @@ public class JiraCSV {
 		this.custom_field_COX_COR = custom_field_COX_COR;
 	}
 
-//	public Date getImported_at() {
-//		return imported_at;
-//	}
-//
-//	public void setImported_at(Date imported_at) {
-//		this.imported_at = imported_at;
-//	}
+	@Override
+	public String toString() {
+		return "JiraCSV [priority=" + priority + ", issue_key=" + issue_key + ", issue_id=" + issue_id + ", summary="
+				+ summary + ", status=" + status + ", created=" + created + ", custom_field_start_date="
+				+ custom_field_start_date + ", resolved=" + resolved + ", custom_field_Onshore_Offshore="
+				+ custom_field_Onshore_Offshore + ", custom_field_COX_Candidate_Level="
+				+ custom_field_COX_Candidate_Level + ", custom_field_COX_Capgemini_Lead="
+				+ custom_field_COX_Capgemini_Lead + ", custom_field_COX_Hiring_Manager="
+				+ custom_field_COX_Hiring_Manager + ", custom_field_COX_Role_Skillset=" + custom_field_COX_Role_Skillset
+				+ ", custom_field_COX_Tier_Level=" + custom_field_COX_Tier_Level
+				+ ", custom_field_Position_Backfill_New=" + custom_field_Position_Backfill_New
+				+ ", custom_field_Cap_SL_BU=" + custom_field_Cap_SL_BU + ", custom_field_Opportunity_Stage="
+				+ custom_field_Opportunity_Stage + ", custom_field_COR=" + custom_field_COR + ", custom_field_COX_COR="
+				+ custom_field_COX_COR + "]";
+	}
+
+
 
 }
